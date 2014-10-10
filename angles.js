@@ -20,14 +20,14 @@ angles.chart = function (type) {
             var ctx = $elem[0].getContext("2d");
             var autosize = false;
 
-			$scope.size = function () {
-	            if ($scope.width <= 0) {
-	                $elem.width($elem.parent().width());
-	                ctx.canvas.width = $elem.width();
-	            } else {
-	                ctx.canvas.width = $scope.width || ctx.canvas.width;
-	                autosize = true;
-	            }
+            $scope.size = function () {
+                if ($scope.width <= 0) {
+                    $elem.width($elem.parent().width());
+                    ctx.canvas.width = $elem.width();
+                } else {
+                    ctx.canvas.width = $scope.width || ctx.canvas.width;
+                    autosize = true;
+                }
 
                 if($scope.height <= 0){
                     $elem.height($elem.parent().height());
@@ -36,7 +36,7 @@ angles.chart = function (type) {
                     ctx.canvas.height = $scope.height || ctx.canvas.height;
                     autosize = true;
                 }
-			}
+            }
 
             $scope.$watch("data", function (newVal, oldVal) {
                 if(chartCreated)
@@ -63,8 +63,8 @@ angles.chart = function (type) {
 
                 chartCreated = chart[type]($scope.data, $scope.options);
                 chartCreated.update();
-                if($scope.legend)
-                    angular.element($elem[0]).parent().after( chartCreated.generateLegend() );
+                if($scope.legend && !!$scope.options.legendContainer)
+                    angular.element($scope.options.legendContainer).empty().append( chartCreated.generateLegend() );
             }, true);
 
             $scope.$watch("tooltip", function (newVal, oldVal) {
