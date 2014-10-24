@@ -64,7 +64,7 @@ angles.chart = function (type) {
                 chartCreated = chart[type]($scope.data, $scope.options);
                 chartCreated.update();
                 if($scope.legend && !!$scope.options.legendContainer)
-                    angular.element($scope.options.legendContainer).empty().append( chartCreated.generateLegend() );
+                    angular.element(document.querySelector($scope.options.legendContainer)).empty().append( chartCreated.generateLegend() );
             }, true);
 
             $scope.$watch("tooltip", function (newVal, oldVal) {
